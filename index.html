@@ -1,215 +1,225 @@
 <!DOCTYPE html>
 <html lang="pt-br" class="light-theme">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Avanços da Aviação do Amanhã - Projeto SAC</title>
-  <meta name="description" content="Projeto SAC - Avanços em Gerenciamento de Tráfego Aéreo para Aeronaves Não Tripuladas em colaboração com DECEA.">
-  <style>
-    :root {
-      --bg-color: #f5f5f5;
-      --text-color: #222;
-      --card-bg: #fff;
-      --card-text: #222;
-      --accent-color: #12699E;
-      --sidebar-width: 220px;
-    }
-    .dark-theme {
-      --bg-color: #121212;
-      --text-color: #f0f0f0;
-      --card-bg: #1e1e1e;
-      --card-text: #ddd;
-      --accent-color: #12699E;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Avanços da Aviação do Amanhã - Projeto SAC</title>
+<style>
+  :root {
+    --bg-color: #12699E;
+    --text-color: #222;
+    --card-bg: #fff;
+    --card-text: #222;
+    --accent-color: #6a1b9a;
+    --sidebar-width: 220px;
+  }
+  .dark-theme {
+    --bg-color: #121212;
+    --text-color: #f0f0f0;
+    --card-bg: #1e1e1e;
+    --card-text: #ddd;
+    --accent-color: #12699E;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  /* sidebar escondida por padrão */
+  nav.sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* escondida fora da tela */
+    height: 100vh;
+    width: var(--sidebar-width);
+    background-color: var(--card-bg);
+    box-shadow: 2px 0 6px rgba(0,0,0,0.1);
+    padding: 2rem 1rem;
+    overflow-y: auto;
+    z-index: 1100;
+    transition: left 0.3s ease;
+  }
+  nav.sidebar.open {
+    left: 0;
+  }
+  nav.sidebar h2 {
+    margin-top: 0;
+    font-size: 1.2rem;
+    color: var(--accent-color);
+    margin-bottom: 1.5rem;
+  }
+  nav.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  nav.sidebar ul li {
+    margin-bottom: 1rem;
+  }
+  nav.sidebar ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    display: block;
+    padding: 0.3rem 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  nav.sidebar ul li a:hover,
+  nav.sidebar ul li a:focus {
+    background-color: var(--accent-color);
+    color: white;
+    outline: none;
+  }
 
-    /* Reset básico */
-    * {
-      box-sizing: border-box;
-    }
+  /* Conteúdo principal com margem para sidebar (quando aberta) */
+  .main-content-wrapper {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin-left: 0;
+    transition: margin-left 0.3s ease;
+  }
+  .main-content-wrapper.shifted {
+    margin-left: var(--sidebar-width);
+  }
 
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg-color);
-      color: var(--text-color);
-      display: flex;
-      min-height: 100vh;
-    }
+  header {
+    background-color: var(--accent-color);
+    color: white;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+    user-select: none;
+  }
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .theme-toggle {
+    background: none;
+    border: 1px solid white;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .hero {
+    padding: 3rem 2rem;
+    text-align: center;
+    background-color: var(--card-bg);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    flex-shrink: 0;
+  }
+  .hero h1 {
+    margin: 0 0 1rem;
+    font-size: 2rem;
+  }
+  .hero p {
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+  }
+  .hero .button {
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    font-size: 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  main.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: var(--bg-color);
+  }
+  .card {
+    background-color: var(--card-bg);
+    color: var(--card-text);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  footer {
+    background-color: var(--accent-color);
+    color: white;
+    text-align: center;
+    padding: 1rem;
+    margin-top: auto;
+    flex-shrink: 0;
+  }
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
 
-    /* Barra lateral fixa */
+  /* Overlay para clique fora para fechar menu */
+  #overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.3);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease;
+    z-index: 1050;
+  }
+  #overlay.active {
+    opacity: 1;
+    visibility: visible;
+  }
+
+  /* Quando menu aberto no mobile */
+  @media (max-width: 768px) {
     nav.sidebar {
-      position: fixed;
-      top: 0;
+      width: 70vw;
+      left: -70vw;
+    }
+    nav.sidebar.open {
       left: 0;
-      height: 100vh;
-      width: var(--sidebar-width);
-      background-color: var(--card-bg);
-      box-shadow: 2px 0 6px rgba(0,0,0,0.1);
-      padding: 2rem 1rem;
-      overflow-y: auto;
-      z-index: 1000;
     }
-
-    nav.sidebar h2 {
-      margin-top: 0;
-      font-size: 1.2rem;
-      color: var(--accent-color);
-      margin-bottom: 1.5rem;
+    .main-content-wrapper.shifted {
+      margin-left: 0;
     }
-
-    nav.sidebar ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    nav.sidebar ul li {
-      margin-bottom: 1rem;
-    }
-
-    nav.sidebar ul li a {
-      color: var(--text-color);
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 1rem;
-      display: block;
-      padding: 0.3rem 0.5rem;
-      border-radius: 4px;
-      transition: background-color 0.3s ease;
-    }
-
-    nav.sidebar ul li a:hover,
-    nav.sidebar ul li a:focus {
-      background-color: var(--accent-color);
-      color: white;
-      outline: none;
-    }
-
-    /* Conteúdo principal com margem para a sidebar */
-    .main-content-wrapper {
-      margin-left: var(--sidebar-width);
-      flex-grow: 1;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    header {
-      background-color: var(--accent-color);
-      color: white;
-      padding: 1rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-shrink: 0;
-    }
-
-    .logo {
-      font-size: 1.5rem;
-      font-weight: bold;
-    }
-
-    .theme-toggle {
-      background: none;
-      border: 1px solid white;
-      color: white;
-      padding: 0.4rem 0.8rem;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-
-    .hero {
-      padding: 3rem 2rem;
-      text-align: center;
-      background-color: var(--card-bg);
-      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
-      flex-shrink: 0;
-    }
-
-    .hero h1 {
-      margin: 0 0 1rem;
-      font-size: 2rem;
-    }
-
-    .hero p {
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto 1.5rem;
-    }
-
-    .hero .button {
-      background-color: var(--accent-color);
-      color: white;
-      border: none;
-      padding: 0.8rem 1.5rem;
-      font-size: 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    main.container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.5rem;
-      padding: 2rem;
-      flex-grow: 1;
-      overflow-y: auto;
-      background-color: var(--bg-color);
-    }
-
-    .card {
-      background-color: var(--card-bg);
-      color: var(--card-text);
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-    }
-
-    footer {
-      background-color: var(--accent-color);
-      color: white;
-      text-align: center;
-      padding: 1rem;
-      margin-top: auto;
-      flex-shrink: 0;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: underline;
-    }
-
-    /* Responsividade para telas menores */
-    @media (max-width: 768px) {
-      nav.sidebar {
-        position: relative;
-        width: 100%;
-        height: auto;
-        box-shadow: none;
-        padding: 1rem;
-      }
-      .main-content-wrapper {
-        margin-left: 0;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-
-  <nav class="sidebar" aria-label="Navegação principal">
+  <nav class="sidebar" aria-label="Navegação principal" id="sidebar">
     <h2>Menu</h2>
     <ul>
-      <li><a href="#hero">Início</a></li>
-      <li><a href="#objetivo">Objetivo do Projeto</a></li>
-      <li><a href="#equipe">Equipe Técnica</a></li>
-      <li><a href="#parceria">Parceria com DECEA</a></li>
-      <li><a href="#transparencia">Transparência Científica</a></li>
+      <li><a href="#hero" tabindex="0">Início</a></li>
+      <li><a href="#objetivo" tabindex="0">Objetivo do Projeto</a></li>
+      <li><a href="#equipe" tabindex="0">Equipe Técnica</a></li>
+      <li><a href="#parceria" tabindex="0">Parceria com DECEA</a></li>
+      <li><a href="#transparencia" tabindex="0">Transparência Científica</a></li>
     </ul>
   </nav>
 
-  <div class="main-content-wrapper">
+  <div id="overlay"></div>
+
+  <div class="main-content-wrapper" id="mainContent">
     <header>
-      <div class="logo">Projeto SAC</div>
+      <div class="logo" id="logoBtn" tabindex="0" role="button" aria-pressed="false" aria-label="Abrir menu de navegação">
+        Projeto SAC
+      </div>
       <button
         class="theme-toggle"
         onclick="toggleTheme()"
@@ -253,26 +263,46 @@
     </footer>
   </div>
 
-  <script>
-    const themeToggleBtn = document.getElementById('themeToggleBtn');
+<script>
+  const sidebar = document.getElementById('sidebar');
+  const logoBtn = document.getElementById('logoBtn');
+  const overlay = document.getElementById('overlay');
+  const mainContent = document.getElementById('mainContent');
 
-    function applyTheme(theme) {
-      document.documentElement.classList.remove('light-theme', 'dark-theme');
-      document.documentElement.classList.add(theme + '-theme');
-      themeToggleBtn.setAttribute('aria-pressed', theme === 'dark');
+  function toggleSidebar() {
+    const isOpen = sidebar.classList.contains('open');
+    if (isOpen) {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('active');
+      mainContent.classList.remove('shifted');
+      logoBtn.setAttribute('aria-pressed', 'false');
+      document.body.style.overflow = '';
+    } else {
+      sidebar.classList.add('open');
+      overlay.classList.add('active');
+      mainContent.classList.add('shifted');
+      logoBtn.setAttribute('aria-pressed', 'true');
+      document.body.style.overflow = 'hidden'; // evita scroll atrás do menu aberto
+      sidebar.querySelector('a').focus(); // foco no primeiro link para acessibilidade
     }
+  }
 
-    function toggleTheme() {
-      const isDark = document.documentElement.classList.contains('dark-theme');
-      const newTheme = isDark ? 'light' : 'dark';
-      applyTheme(newTheme);
-      localStorage.setItem('theme', newTheme);
+  logoBtn.addEventListener('click', toggleSidebar);
+  logoBtn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleSidebar();
     }
+  });
 
-    window.onload = () => {
-      const savedTheme = localStorage.getItem('theme') || 'light';
-      applyTheme(savedTheme);
-    };
-  </script>
+  overlay.addEventListener('click', toggleSidebar);
+
+  // Fecha o menu ao clicar num link e remove foco do menu
+  sidebar.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      toggleSidebar();
+    });
+  });
+</script>
 </body>
 </html>
