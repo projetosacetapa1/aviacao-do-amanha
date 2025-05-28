@@ -1,202 +1,154 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-br" class="light-theme">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Projeto SAC – Avanços da Aviação do Amanhã</title>
+  <title>Avanços da Aviação do Amanhã - Projeto SAC</title>
   <style>
     :root {
-      --bg-light: #ffffff;
-      --text-light: #111111;
-      --bg-dark: #111111;
-      --text-dark: #f5f5f5;
-      --accent: #6a00ff;
-      --transition-speed: 0.3s;
+      --bg-color: #f5f5f5;
+      --text-color: #222;
+      --card-bg: #fff;
+      --card-text: #222;
+      --accent-color: #6a1b9a;
     }
-
-    html {
-      scroll-behavior: smooth;
+    .dark-theme {
+      --bg-color: #121212;
+      --text-color: #f0f0f0;
+      --card-bg: #1e1e1e;
+      --card-text: #fff;
+      --accent-color: #ab47bc;
     }
 
     body {
-      font-family: Arial, sans-serif;
       margin: 0;
-      padding: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    header {
+      background-color: var(--accent-color);
+      color: white;
+      padding: 1rem 2rem;
       display: flex;
-      transition: background-color var(--transition-speed), color var(--transition-speed);
+      justify-content: space-between;
+      align-items: center;
     }
 
-    body.light-theme {
-      background-color: var(--bg-light);
-      color: var(--text-light);
-    }
-
-    body.dark-theme {
-      background-color: var(--bg-dark);
-      color: var(--text-dark);
-    }
-
-    aside {
-      width: 250px;
-      padding: 2rem 1rem;
-      position: fixed;
-      top: 0;
-      left: 0;
-      height: 100vh;
-      background-color: rgba(0,0,0,0.05);
-      backdrop-filter: blur(6px);
-      overflow-y: auto;
-      border-right: 1px solid rgba(0,0,0,0.1);
-    }
-
-    aside h2 {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      text-transform: uppercase;
-    }
-
-    aside ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    aside li {
-      margin-bottom: 0.5rem;
-    }
-
-    aside a {
-      color: inherit;
-      text-decoration: none;
-      transition: color var(--transition-speed);
-    }
-
-    aside a:hover {
-      color: var(--accent);
-    }
-
-    .content {
-      margin-left: 260px;
-      padding: 2rem;
-      max-width: 900px;
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
     }
 
     .theme-toggle {
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      padding: 0.5rem 1rem;
-      background-color: var(--accent);
+      background: none;
+      border: 1px solid white;
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .hero {
+      padding: 3rem 2rem;
+      text-align: center;
+      background-color: var(--card-bg);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    }
+
+    .hero h1 {
+      margin: 0 0 1rem;
+      font-size: 2rem;
+    }
+
+    .hero p {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+    }
+
+    .hero .button {
+      background-color: var(--accent-color);
       color: white;
       border: none;
-      border-radius: 6px;
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      border-radius: 4px;
       cursor: pointer;
-      z-index: 100;
-      transition: background-color 0.3s;
     }
 
-    .theme-toggle:hover {
-      background-color: #4b00c1;
+    .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem;
     }
 
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    h2 {
-      font-size: 1.4rem;
-      margin-top: 2rem;
-      margin-bottom: 0.5rem;
-    }
-
-    ul {
-      padding-left: 1.5rem;
+    .card {
+      background-color: var(--card-bg);
+      color: var(--card-text);
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
 
     footer {
-      margin-top: 3rem;
+      background-color: var(--accent-color);
+      color: white;
       text-align: center;
-      font-size: 0.9rem;
+      padding: 1rem;
+      margin-top: 2rem;
     }
 
-    /* Framer-like animations */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(20px);
-      animation: fadeUp 0.8s ease-out forwards;
+    a {
+      color: inherit;
+      text-decoration: underline;
     }
-
-    @keyframes fadeUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .delay-1 { animation-delay: 0.2s; }
-    .delay-2 { animation-delay: 0.4s; }
-    .delay-3 { animation-delay: 0.6s; }
   </style>
 </head>
-<body class="light-theme">
-  <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+<body>
 
-  <aside>
-    <h2>Seções</h2>
-    <ul>
-      <li><a href="#intro">Introdução</a></li>
-      <li><a href="#etapa1">Etapa 1</a></li>
-      <li><a href="#equipe">Equipe</a></li>
-      <li><a href="#contato">Contato</a></li>
-    </ul>
-  </aside>
+  <header>
+    <div class="logo">Projeto SAC</div>
+    <button class="theme-toggle" onclick="toggleTheme()">Alternar Tema</button>
+  </header>
 
-  <main class="content">
-    <section id="intro" class="fade-up delay-1">
-      <h1>Projeto SAC</h1>
-      <p><strong>Avanços da Aviação do Amanhã</strong></p>
-    </section>
+  <section class="hero">
+    <h1>Avanços da Aviação do Amanhã</h1>
+    <p>
+      Conheça os resultados e pesquisas em Gerenciamento de Tráfego Aéreo para Aeronaves Não Tripuladas (UTM), desenvolvidos em colaboração com o DECEA.
+    </p>
+    <button class="button">Ver Atualizações</button>
+  </section>
 
-    <section id="etapa1" class="fade-up delay-2">
-      <h2>Etapa 1: Modelagem UTM</h2>
-      <p>
-        Esta etapa se concentra na <strong>simulação, especificação e projeto conceitual</strong> de um ambiente para <strong>gerenciamento de aeronaves não tripuladas (UTM)</strong>, a ser desenvolvido para o <strong>DECEA</strong>. Nesta fase, não haverá implementação, apenas modelagem e definição de requisitos.
-      </p>
-      <p>
-        A iniciativa visa dar <strong>visibilidade pública</strong> aos resultados, conforme orientação do DECEA, promovendo <strong>transparência</strong> e <strong>conhecimento social</strong> sobre os avanços em Gerenciamento de Tráfego Aéreo para aeronaves não tripuladas.
-      </p>
-    </section>
-
-    <section id="equipe" class="fade-up delay-3">
-      <h2>Equipe de Pesquisadores</h2>
-      <ul>
-        <li><strong>Professor Coordenador</strong> – responsável pela gestão geral do projeto.</li>
-        <li><strong>Prof. Denis Loba</strong> – Computação, desenvolvimento técnico.</li>
-        <li><strong>Prof. Inaldo</strong> – Engenharia de Software, estruturação e modelagem.</li>
-        <li><strong>Marcos</strong> – técnico de informática da Divisão de Computação.</li>
-        <li><strong>Gildarso</strong> – doutorando com atuação em pesquisa aplicada.</li>
-        <li><strong>Jackson T. Veiga</strong> – bolsista IC, orientado pelo Prof. Carlos Henrique.</li>
-      </ul>
-    </section>
-
-    <section id="contato" class="fade-up delay-3">
-      <h2>Contato e Parcerias</h2>
-      <p>
-        Para mais informações ou parcerias institucionais, entre em contato com o coordenador do projeto via e-mail institucional.
-      </p>
-    </section>
-
-    <footer>
-      <p>&copy; 2025 Projeto SAC – Todos os direitos reservados.</p>
-      <p><a href="index.html">← Voltar para o Início</a></p>
-    </footer>
+  <main class="container">
+    <div class="card">
+      <h3>Objetivo do Projeto</h3>
+      <p>Modelar um ambiente conceitual de UTM, focado no controle de tráfego de aeronaves não tripuladas em território nacional.</p>
+    </div>
+    <div class="card">
+      <h3>Equipe Técnica</h3>
+      <p>Composta por professores, pesquisadores e técnicos com expertise em computação, engenharia de software e simulações aplicadas.</p>
+    </div>
+    <div class="card">
+      <h3>Parceria com DECEA</h3>
+      <p>O projeto visa atender uma demanda estratégica do Departamento de Controle do Espaço Aéreo para tecnologias de tráfego aéreo.</p>
+    </div>
+    <div class="card">
+      <h3>Transparência Científica</h3>
+      <p>Os resultados serão apresentados à sociedade com foco em acessibilidade e disseminação do conhecimento em engenharia aeronáutica.</p>
+    </div>
   </main>
+
+  <footer>
+    &copy; 2025 Projeto SAC – Avanços da Aviação do Amanhã. Desenvolvido por equipe acadêmica e técnica.
+  </footer>
 
   <script>
     function toggleTheme() {
-      const body = document.body;
-      body.classList.toggle("dark-theme");
-      body.classList.toggle("light-theme");
+      document.documentElement.classList.toggle("dark-theme");
+      document.documentElement.classList.toggle("light-theme");
     }
   </script>
 </body>
