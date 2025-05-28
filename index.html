@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Projeto SAC – Avanços da Aviação do Amanhã</title>
+  <style>
+    :root {
+      --bg-light: #ffffff;
+      --text-light: #111111;
+      --bg-dark: #111111;
+      --text-dark: #f5f5f5;
+      --accent: #6a00ff;
+      --transition-speed: 0.3s;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+    }
+
+    body.light-theme {
+      background-color: var(--bg-light);
+      color: var(--text-light);
+    }
+
+    body.dark-theme {
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    aside {
+      width: 250px;
+      padding: 2rem 1rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      background-color: rgba(0,0,0,0.05);
+      backdrop-filter: blur(6px);
+      overflow-y: auto;
+      border-right: 1px solid rgba(0,0,0,0.1);
+    }
+
+    aside h2 {
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+    }
+
+    aside ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    aside li {
+      margin-bottom: 0.5rem;
+    }
+
+    aside a {
+      color: inherit;
+      text-decoration: none;
+      transition: color var(--transition-speed);
+    }
+
+    aside a:hover {
+      color: var(--accent);
+    }
+
+    .content {
+      margin-left: 260px;
+      padding: 2rem;
+      max-width: 900px;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 10px;
+      right: 10px;
+      padding: 0.5rem 1rem;
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      z-index: 100;
+      transition: background-color 0.3s;
+    }
+
+    .theme-toggle:hover {
+      background-color: #4b00c1;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    ul {
+      padding-left: 1.5rem;
+    }
+
+    footer {
+      margin-top: 3rem;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    /* Framer-like animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .delay-1 { animation-delay: 0.2s; }
+    .delay-2 { animation-delay: 0.4s; }
+    .delay-3 { animation-delay: 0.6s; }
+  </style>
+</head>
+<body class="light-theme">
+  <button class="theme-toggle" onclick="toggleTheme()">🌓</button>
+
+  <aside>
+    <h2>Seções</h2>
+    <ul>
+      <li><a href="#intro">Introdução</a></li>
+      <li><a href="#etapa1">Etapa 1</a></li>
+      <li><a href="#equipe">Equipe</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </aside>
+
+  <main class="content">
+    <section id="intro" class="fade-up delay-1">
+      <h1>Projeto SAC</h1>
+      <p><strong>Avanços da Aviação do Amanhã</strong></p>
+    </section>
+
+    <section id="etapa1" class="fade-up delay-2">
+      <h2>Etapa 1: Modelagem UTM</h2>
+      <p>
+        Esta etapa se concentra na <strong>simulação, especificação e projeto conceitual</strong> de um ambiente para <strong>gerenciamento de aeronaves não tripuladas (UTM)</strong>, a ser desenvolvido para o <strong>DECEA</strong>. Nesta fase, não haverá implementação, apenas modelagem e definição de requisitos.
+      </p>
+      <p>
+        A iniciativa visa dar <strong>visibilidade pública</strong> aos resultados, conforme orientação do DECEA, promovendo <strong>transparência</strong> e <strong>conhecimento social</strong> sobre os avanços em Gerenciamento de Tráfego Aéreo para aeronaves não tripuladas.
+      </p>
+    </section>
+
+    <section id="equipe" class="fade-up delay-3">
+      <h2>Equipe de Pesquisadores</h2>
+      <ul>
+        <li><strong>Professor Coordenador</strong> – responsável pela gestão geral do projeto.</li>
+        <li><strong>Prof. Denis Loba</strong> – Computação, desenvolvimento técnico.</li>
+        <li><strong>Prof. Inaldo</strong> – Engenharia de Software, estruturação e modelagem.</li>
+        <li><strong>Marcos</strong> – técnico de informática da Divisão de Computação.</li>
+        <li><strong>Gildarso</strong> – doutorando com atuação em pesquisa aplicada.</li>
+        <li><strong>Jackson T. Veiga</strong> – bolsista IC, orientado pelo Prof. Carlos Henrique.</li>
+      </ul>
+    </section>
+
+    <section id="contato" class="fade-up delay-3">
+      <h2>Contato e Parcerias</h2>
+      <p>
+        Para mais informações ou parcerias institucionais, entre em contato com o coordenador do projeto via e-mail institucional.
+      </p>
+    </section>
+
+    <footer>
+      <p>&copy; 2025 Projeto SAC – Todos os direitos reservados.</p>
+      <p><a href="index.html">← Voltar para o Início</a></p>
+    </footer>
+  </main>
+
+  <script>
+    function toggleTheme() {
+      const body = document.body;
+      body.classList.toggle("dark-theme");
+      body.classList.toggle("light-theme");
+    }
+  </script>
+</body>
+</html>
